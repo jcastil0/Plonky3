@@ -70,16 +70,12 @@ pub enum InvalidProofShapeError {
     /// Preprocessed metadata missing or mismatched.
     #[error("air {air}: preprocessed metadata mismatch")]
     PreprocessedMetadataMismatch { air: usize },
+    /// Public values length doesn't match what the AIR expects.
+    #[error("public values length mismatch: expected {expected}, got {got}")]
+    PublicValuesLengthMismatch { expected: usize, got: usize },
     /// Lookup commitment presence doesn't match lookup configuration.
     #[error("lookup commitment presence does not match lookup configuration")]
     LookupCommitmentMismatch,
-    /// Global lookup data count doesn't match the number of global lookups for an AIR.
-    #[error("air {air}: global lookup data count mismatch: expected {expected}, got {got}")]
-    GlobalLookupDataCountMismatch {
-        air: usize,
-        expected: usize,
-        got: usize,
-    },
     /// Permutation local and next have different lengths.
     #[error("air {air}: permutation local/next length mismatch")]
     PermutationLengthMismatch { air: usize },
