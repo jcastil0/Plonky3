@@ -76,6 +76,25 @@ pub enum InvalidProofShapeError {
     /// Lookup commitment presence doesn't match lookup configuration.
     #[error("lookup commitment presence does not match lookup configuration")]
     LookupCommitmentMismatch,
+    /// Global lookup data count doesn't match the number of global lookups for an AIR.
+    #[error("air {air}: global lookup data count mismatch: expected {expected}, got {got}")]
+    GlobalLookupDataCountMismatch {
+        air: usize,
+        expected: usize,
+        got: usize,
+    },
+    /// Global lookup proof metadata doesn't match the AIR's declared interactions.
+    #[error(
+        "air {air}: global lookup data metadata mismatch at index {lookup}: expected name={expected_name}, aux_idx={expected_aux_idx}; got name={got_name}, aux_idx={got_aux_idx}"
+    )]
+    GlobalLookupDataMetadataMismatch {
+        air: usize,
+        lookup: usize,
+        expected_name: String,
+        got_name: String,
+        expected_aux_idx: usize,
+        got_aux_idx: usize,
+    },
     /// Permutation local and next have different lengths.
     #[error("air {air}: permutation local/next length mismatch")]
     PermutationLengthMismatch { air: usize },
